@@ -1,0 +1,10 @@
+data/
+*.parquet
+*.parquet.bak
+*.csv.gz
+__pycache__/
+.DS_Store
+*.docx
+screenshot*
+PROJECT_STATE.md
+_backup/
