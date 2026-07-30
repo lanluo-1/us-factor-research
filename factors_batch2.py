@@ -1,5 +1,5 @@
 """
-D3: second factor batch (momentum/reversal/risk/liquidity/accruals/asset
+Second factor batch (momentum/reversal/risk/liquidity/accruals/asset
 growth, 8 factors) -> merged into the full 13-factor panel.
 
 Factor          Definition                                    Dir  Source
@@ -42,10 +42,9 @@ v2 (2026-07-30) revision notes -- why v1 got OOM-killed (zsh: killed)
    rerun does not recompute what already finished.
    On an 8 GB machine, strongly prefer running the steps one by one
    (see usage at the bottom of this file).
-5. [important] This file now ships its OWN cross-sectional preprocessing
-   kernel and no longer imports preprocess.py.
-   -> Only this one file needed replacing; preprocess.py stays untouched
-   (so batch1's methodology remains exactly reproducible).
+5. This file ships its own cross-sectional preprocessing kernel and
+   does not import preprocess.py; batch1's methodology remains exactly
+   reproducible from the untouched preprocess.py.
    The kernel matches preprocess.py v1 value for value:
      - residuals via np.linalg.lstsq vs statsmodels sm.OLS(...).fit().resid
        (pinv solution): max diff 7e-15;
@@ -320,8 +319,8 @@ def step1_raw_factors() -> None:
     cov_mkt = panel["mkt_ret"].notna().mean()
     print(f"    market return match rate: {cov_mkt:.1%}")
     if cov_mkt < 0.90:
-        print("    !! match rate too low -- panel date and index mthcaldt are probably")
-        print("       different month-end conventions. Stop and check this number first.")
+        print("    !! match rate too low -- panel date and index mthcaldt probably")
+        print("       use different month-end conventions; fix this before proceeding.")
     sub = panel[["permno", "ret", "mkt_ret"]]
     gb = sub.groupby("permno", group_keys=False)
     try:

@@ -6,7 +6,7 @@ Inputs : data/processed/ls_returns.parquet  (raw Q5-minus-Q1, unflipped;
          data/raw/ff_factors_monthly.parquet (decimal units)
 Output : data/processed/ff5_alpha_results.csv
 
-Key decisions (README material):
+Key decisions:
 - Alignment: LS return stored at signal month t is realized in t+1,
   so the index is shifted +1 month to match FF factors of the return month.
 - Zero-investment: a long-short portfolio is self-financing, so RF must

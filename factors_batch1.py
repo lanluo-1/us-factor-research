@@ -1,5 +1,5 @@
 """
-D2: first factor batch (value + quality, 5 factors) -- uses only columns
+First factor batch (value + quality, 5 factors) -- uses only columns
 already present in panel.parquet.
 
 Factor         Definition                           Direction
@@ -13,7 +13,7 @@ ROE            TTM net income / ceqq_q              +
 TTM: rolling 4-quarter sum of quarterly niq.
 * oancfy is fiscal-year-to-date cumulative; single quarter = current -
   previous (within the fiscal year), first fiscal quarter = current.
-  For simplicity CFP uses ANNUAL oancf here (quarterly TTM deferred to D3).
+  For simplicity CFP uses ANNUAL oancf here (quarterly TTM left as future work).
 
 Usage:
     python3 factors_batch1.py

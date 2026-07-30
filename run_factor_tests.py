@@ -1,5 +1,5 @@
 """
-D4: Single-factor long-short tests with multiple-testing corrections.
+Single-factor long-short tests with multiple-testing corrections.
 
 Portfolio construction (per factor):
   - Formation month t: rank stocks by the factor z-score, split into

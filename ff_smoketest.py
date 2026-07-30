@@ -1,6 +1,6 @@
 """
-Ken French smoke test -- runnable before WRDS access arrives; validates
-the multiple-testing module end to end.
+Ken French smoke test -- validates the multiple-testing module end to
+end using only free, public data (no WRDS required).
 
 What it does
 ------------
@@ -9,8 +9,8 @@ every industry as a "strategy", and run the full significance battery.
 A real question: out of 49 industries, how many excess returns survive
 multiple-testing correction?
 
-The usual answer: very few. This is exactly what the real project later
-does to its own factor panel.
+The usual answer: very few. run_factor_tests.py applies the same
+battery to the CRSP/Compustat factor panel.
 """
 from __future__ import annotations
 import io, zipfile, urllib.request

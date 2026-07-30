@@ -2,7 +2,7 @@
 the NYSE 20th-percentile mktcap breakpoint (Fama-French microcap cut).
 
 robustness_microcap v1.0 (2026-07-30)
-Also validates mktcap > 0 (retroactive check on the VW run).
+Also validates mktcap > 0 (a precondition for valid VW weights).
 Output: data/processed/robustness_micro.csv
 """
 import resource

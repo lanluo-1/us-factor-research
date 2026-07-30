@@ -1,6 +1,6 @@
 """
-Multiple-testing corrections and statistical significance -- what separates
-this project from a typical course assignment.
+Multiple-testing corrections and statistical significance for
+cross-sectional factor research.
 
 The core problem
 ----------------
@@ -75,7 +75,7 @@ def sharpe_difference_test(r1, r2, periods_per_year: int = 12) -> dict:
     Is the Sharpe difference between two strategies significant?
     Jobson-Korkie with the Memmel (2003) correction.
 
-    * Mandatory whenever claiming "X beats Y". With 180 months of data,
+    * Use this before claiming one strategy beats another. With 180 months of data,
       a Sharpe gap of 0.3 is usually NOT significant.
     """
     df = pd.concat([pd.Series(r1).rename("a"), pd.Series(r2).rename("b")], axis=1).dropna()
@@ -166,8 +166,7 @@ def ff5_alpha(strategy_returns, ff_factors: pd.DataFrame,
     return; drop RF from ff_factors for zero-investment long-short returns.
 
     * An alpha t < 2 means the strategy is essentially a linear combination
-      of known factors. Have the nerve to write that down -- it is far more
-      honest than an unadjusted pretty Sharpe.
+      of known factors -- a legitimate result in its own right.
     """
     import statsmodels.api as sm
     cols = ["Mkt-RF", "SMB", "HML", "RMW", "CMA"]
