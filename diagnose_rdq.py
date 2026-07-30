@@ -1,8 +1,11 @@
 """
-rdq 缺失诊断 —— 回答三个问题:
-  1. 缺失集中在哪些年份?(早年集中 = 已知现象,放心)
-  2. 缺失的是大公司还是小公司?(小公司 = 影响有限)
-  3. 有 rdq 的行里,rdq - datadate 实际间隔多少天?(检验 90 天保守规则合不合理)
+rdq missingness diagnosis -- answers three questions:
+  1. Which years is the missingness concentrated in? (early years =
+     known phenomenon, fine)
+  2. Is it large or small firms that are missing? (small = limited impact)
+  3. For rows that HAVE rdq, what is the actual rdq - datadate gap in
+     days? (tests whether the 90-day conservative rule is reasonable)
+(English translation 2026-07-30; logic unchanged.)
 """
 import pandas as pd
 from pathlib import Path
@@ -13,28 +16,29 @@ q = pd.read_csv(RAW / "compustat_quarterly_2005_2024.csv.gz",
                 parse_dates=["datadate", "rdq"], low_memory=False)
 q = q[q["curcdq"].eq("USD")]
 
-print(f"总行数 {len(q):,}, rdq 缺失 {q['rdq'].isna().sum():,} ({q['rdq'].isna().mean()*100:.1f}%)\n")
+print(f"total rows {len(q):,}, rdq missing {q['rdq'].isna().sum():,} ({q['rdq'].isna().mean()*100:.1f}%)\n")
 
-# ---- 1. 按年份 ----
+# ---- 1. by year ----
 q["year"] = q["datadate"].dt.year
 by_year = q.groupby("year")["rdq"].apply(lambda s: s.isna().mean() * 100).round(1)
-print("按年份的缺失率 (%):")
+print("missing rate by year (%):")
 print(by_year.to_string())
 
-# ---- 2. 按公司规模 (用总资产 atq 分位) ----
+# ---- 2. by firm size (total assets atq quartiles) ----
 q_valid = q.dropna(subset=["atq"])
 q_valid = q_valid.assign(
-    size_bucket=pd.qcut(q_valid["atq"], 4, labels=["小(Q1)", "中小(Q2)", "中大(Q3)", "大(Q4)"]))
+    size_bucket=pd.qcut(q_valid["atq"], 4, labels=["small(Q1)", "mid-small(Q2)", "mid-large(Q3)", "large(Q4)"]))
 by_size = q_valid.groupby("size_bucket", observed=True)["rdq"] \
                  .apply(lambda s: s.isna().mean() * 100).round(1)
-print("\n按总资产四分位的缺失率 (%):")
+print("\nmissing rate by total-assets quartile (%):")
 print(by_size.to_string())
 
-# ---- 3. rdq - datadate 的实际分布 ----
+# ---- 3. actual rdq - datadate distribution ----
 gap = (q["rdq"] - q["datadate"]).dt.days.dropna()
-print(f"\n有 rdq 的行, 公告滞后天数分布:")
-print(f"  中位数 {gap.median():.0f} 天, 均值 {gap.mean():.0f} 天")
-print(f"  90% 分位 {gap.quantile(0.9):.0f} 天, 99% 分位 {gap.quantile(0.99):.0f} 天")
-print(f"  超过 90 天的占比: {(gap > 90).mean()*100:.1f}%")
-print(f"\n结论提示: 若真实滞后的 90 分位 <= 90 天, 则 datadate+90 的保守规则")
-print(f"对缺失行是安全的(宁可晚用数据,不会提前偷看)。")
+print(f"\nrows with rdq, announcement-lag distribution (days):")
+print(f"  median {gap.median():.0f}, mean {gap.mean():.0f}")
+print(f"  90th pct {gap.quantile(0.9):.0f}, 99th pct {gap.quantile(0.99):.0f}")
+print(f"  share above 90 days: {(gap > 90).mean()*100:.1f}%")
+print(f"\nconclusion hint: if the true lag's 90th percentile is <= 90 days,")
+print(f"the datadate+90 fallback is safe for missing rows (data may be used")
+print(f"late, but is never peeked at early).")
