@@ -5,7 +5,6 @@ rdq missingness diagnosis -- answers three questions:
   2. Is it large or small firms that are missing? (small = limited impact)
   3. For rows that HAVE rdq, what is the actual rdq - datadate gap in
      days? (tests whether the 90-day conservative rule is reasonable)
-(English translation 2026-07-30; logic unchanged.)
 """
 import pandas as pd
 from pathlib import Path

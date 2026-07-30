@@ -1,7 +1,6 @@
 """
 Data loading layer -- written against the real column names of the four
 files downloaded from a WRDS Day Pass on 2026-07-29.
-(English translation 2026-07-30; logic unchanged.)
 
 Files (in data/raw/):
     crsp_monthly_2007_2024.csv.gz        1,667,100 rows  CRSP monthly (CIZ)

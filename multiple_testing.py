@@ -1,7 +1,6 @@
 """
 Multiple-testing corrections and statistical significance -- what separates
 this project from a typical course assignment.
-(English translation 2026-07-30; logic unchanged.)
 
 The core problem
 ----------------

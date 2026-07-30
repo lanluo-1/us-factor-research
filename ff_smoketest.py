@@ -1,9 +1,6 @@
 """
 Ken French smoke test -- runnable before WRDS access arrives; validates
 the multiple-testing module end to end.
-(English translation 2026-07-30; logic unchanged except the import path:
-was `from evaluation.multiple_testing import ...` under an old src/
-layout, now the flat repo layout's `from multiple_testing import ...`.)
 
 What it does
 ------------

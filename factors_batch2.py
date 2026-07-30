@@ -1,7 +1,6 @@
 """
 D3: second factor batch (momentum/reversal/risk/liquidity/accruals/asset
 growth, 8 factors) -> merged into the full 13-factor panel.
-(English translation 2026-07-30; logic unchanged.)
 
 Factor          Definition                                    Dir  Source
 ------          ----------                                    ---  ------

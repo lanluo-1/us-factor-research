@@ -1,7 +1,6 @@
 """
 Cross-sectional preprocessing pipeline -- winsorize -> fill -> z-score ->
 industry+size neutralize -> z-score again.
-(English translation 2026-07-30; logic unchanged.)
 
 The order matters; see individual docstrings for why.
 Every function operates on a single cross-section (one date); process_panel

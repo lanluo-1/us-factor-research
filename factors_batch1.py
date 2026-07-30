@@ -1,7 +1,6 @@
 """
 D2: first factor batch (value + quality, 5 factors) -- uses only columns
 already present in panel.parquet.
-(English translation 2026-07-30; logic unchanged.)
 
 Factor         Definition                           Direction
 ------         ----------                           ---------
