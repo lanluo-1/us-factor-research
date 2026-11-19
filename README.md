@@ -61,7 +61,8 @@ Max imputed share: BETA_60M 15.9%, ASSET_GROWTH 15.2%.
 
 Funnel (12 candidates): naive |t|>2: 5 -> Bonferroni: 3 -> BHY: 4 ->
 DSR: 3. Survive all gates: BM, ASSET_GROWTH, REV_1M. CFP passes BHY
-only (t = 2.79 vs Bonferroni threshold 2.87). Fail everything: ROE
+only (t = 2.79 vs Bonferroni threshold 2.87). GP_AT passes only the
+naive threshold (t = 2.69) and fails all three gates. Fail everything: ROE
 (1.36), ACCRUALS (1.15), TURNOVER (0.98), MOM_12_2 (0.96), EP_TTM
 (0.85), VOL_36M (0.26), BETA_60M (0.06, sign flipped vs literature).
 
