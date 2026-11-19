@@ -90,8 +90,13 @@ Consistent with the large-scale replication evidence (Hou-Xue-Zhang
 
 ## Validation
 
-- Planted-signal sandbox: injected signal recovered at t = 20;
-  look-ahead canary comes back at t = 0.1 (clean).
+- Planted-signal sandbox (sandbox_planted_signal.py; 100 simulated
+  panels of 2,000 stocks x 120 months, fixed seeds): the planted
+  signal is recovered in every panel (median t = 12.8, min 8.1);
+  a placebo and a look-ahead canary exceed |t| = 2 in 5% and 2% of
+  panels (nominal 5%); the canary fires in every deliberately
+  misaligned run (median t = 15.7); forward returns are NaN across
+  a deleted month (no stitching).
 - Alignment canary: corr(BM long-short, HML, same month) = 0.51.
 - Ken French data check: Oct-2008 Mkt-RF = -17.2%; 216 months, no NaN.
 - Batch-2 numpy kernel verified against the statsmodels reference
@@ -122,5 +127,6 @@ Consistent with the large-scale replication evidence (Hou-Xue-Zhang
     python3 run_ff5_alpha.py        # FF5(+MOM) alphas, NW t
     python3 robustness_checks.py    # VW + no-imputed variants
     python3 robustness_microcap.py  # NYSE-p20 ex-microcap variant
+    python3 sandbox_planted_signal.py  # pipeline validation, simulated data (no WRDS needed)
 
 Dependencies: pandas, numpy, statsmodels, pyarrow.
